@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" type="text/css" href="/weatherAppNodejs//assets/css/styles.css" /> -->
+    <title>Live Weather Status</title>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    font-family: "Quicksand", "sans-serif";
+}
+html, body{
+    height: 100%;
+}
+html{
+    background-image: linear-gradient(to right top, #00576f, #316290, #6e66a5, #ab66a4, #dd678f, #ea6b89, #f57083, #ff767b, #ff7191, #ff6fa9, #fa72c3, #eb79dc);
+}
+
+.container{
+    height: 60vh;
+    width: 20vw;
+    border: 2px solid silver;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.2rem 3rem rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    text-align: center;
+    background-image: linear-gradient(to right top, #5eabf0, #5ba9ec, #58a6e8, #55a4e5, #52a1e1, #3cabe5, #22b5e6, #00bee5, #00d3db, #3ee4c2, #8cf1a0, #d4f883);
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+    margin: auto;
+    margin-top: 20vh;
+    min-height: 20rem;
+    min-width: 35rem;
+}
+
+.waves{
+    opacity: 0.3;
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    background: white;
+    width: 50rem;
+    height: 50rem;
+    margin-left: -25rem;
+    margin-top: -25rem;
+    transform-origin: 50% 48%;
+    border-radius: 43%;
+    animation: drift 3000ms infinite linear;
+    z-index: 1;
+}
+
+.waves.wave3{
+    animation: drift 5000ms infinite linear;
+    z-index: 2 !important;
+    opacity: 0.2;
+}
+
+.waves.wave2{
+    animation: drift 7000ms infinite linear;
+    z-index: 3 !important;
+    opacity: 0.1;
+}
+
+.container:after{
+    content: "";
+    display: block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 11;
+    transform: translate3d(0, 0, 0);
+}
+
+@keyframes drift {
+    from {
+        transform: rotate(0deg);
+    }
+    from {
+        transform: rotate(360deg);
+    }    
+}
+
+.info{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 45%;
+    z-index: 4;
+}
+
+.location{
+    margin-top: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 3rem;
+}
+
+.fa-street-view{
+    animation: rotates 3s linear infinite alternate;
+}
+
+@keyframes rotates {
+    from {
+        transform: translateX(-0.5rem);
+    }
+    to {
+        transform: translateX(0.5rem);
+    }    
+}
+
+#date-time{
+    text-align: center;
+    margin-top: 0.5rem;
+    color: #57606f;
+    font-size: 1.2rem;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.temperature{
+    margin-top: 2.5rem;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.temp-min-max{
+    text-align: center;
+    margin-top: 0.3rem;
+    font-weight: 300;
+    font-size: 1.2rem;
+    color: #57606f;
+}
+
+#weather-condtn{
+    height: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+}
+
+#weather-condtn .fa-sun{
+    font-size: 6rem;
+    animation: fas-anime 3s linear infinite alternate;
+}
+
+@keyframes fas-anime {
+    from {
+        transform: scale(1.1);
+    }
+    to {
+        transform: scale(1.5);
+    }    
+}
+
+@media (max-width: 600px){
+    .container{
+        height: 80vh;
+        width: 90vw;
+    }
+
+    .waves{
+        top: 85%;
+    }
+
+    #weather-condtn{
+        font-size: 5em;
+    }
+
+    .info{
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-height: 500ox){
+    .container{
+        height: 80vh;
+    }
+
+    .waves{
+        top: 115%;
+    }
+}
+
+body > span{
+    width: 100vw;
+    text-align: center;
+    color: grey;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="waves wave1"></div>
+        <div class="waves wave2"></div>
+        <div class="waves wave3"></div>
+
+        <div id="weather-condtn">
+            <i class="fa-sharp fa-solid fa-sun" style=" color: #eccc68"></i>
+        </div>
+        <div class="info">
+            <h2 class="location"><i class="fa-solid fa-street-view" style=" color: whitesmoke"></i>{%location%}, {%country%}</h2>
+            <p id="date-time">MON | APR 4 | 05:45PM</p>
+            <h1 class="temperature">{%temp%}°C</h1>
+            <h3 class="temp-min-max">Min {%tempMin%}°C | Max {%tempMax%}°C</h3>
+    </div>
+
+    <script type="text/javascript">
+        const currDate = document.getElementById('date-time');
+let weatherCondtn = document.getElementById('weather-condtn');
+
+const tempStatus = "{%temp_status%}";
+
+if(tempStatus=="Sunny"){
+    weatherCondtn.innerHTML = "<i class='fa-sharp fa-solid fa-sun' style=' color: #eccc68'>";
+}else if(tempStatus=="Clouds"){
+    weatherCondtn.innerHTML = "<i class='fa-solid fa-clouds' style=' color: #dfe4ea'></i>";
+}else if(tempStatus=="Rainy"){
+    weatherCondtn.innerHTML = "<i class='fa-solid fa-cloud-rain' style=' color: #a4b0be'></i>";
+}else{
+    weatherCondtn.innerHTML = weatherCondtn.innerHTML;
+}
+
+const getCurrDay = () => {
+    const weekday = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
+    let currTime = new Date();
+    let d = currTime.getDay();
+    let day = weekday[d];
+    return day;
+}
+
+const getCurrTime = () => {
+    var now = new Date();
+    var m = now.getMonth();
+    var date = now.getDate();
+    const month = ["JAN","FEB","MAR","APR","MAY","JUNE","JULY","AUG","SEPT","OCT","NOV","DEC"];
+    var currMon = month[m];
+    
+    let hours = now.getHours();
+    let mins = now.getMinutes();
+
+    let shift = "AM";
+
+    if(hours>11){
+        shift="PM";
+        if(hours>12){
+            hours-=12;
+        }
+    }
+
+    if(hours<10){
+        hours = "0" + hours;
+    }
+
+    if(mins<10){
+        mins = "0" + mins;
+    }
+
+    return currMon+ " " + date + " | " + hours + ":" + mins + shift;
+}
+
+currDate.innerHTML = getCurrDay() + " | " + getCurrTime();
+
+
+getCurrMonth();
+    </script>
+</body>
+</html>
